@@ -35,6 +35,7 @@ const log: LogFunction = async (level, message) => {
 
   // current time in hh:mm:ss format
   const time = new Date().toLocaleTimeString('en-US', {
+    timeZone: 'UTC',
     hour: 'numeric',
     minute: 'numeric',
     second: 'numeric',
