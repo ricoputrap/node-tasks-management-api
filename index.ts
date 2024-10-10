@@ -1,9 +1,11 @@
 import { IncomingMessage, ServerResponse, createServer } from 'http';
-import { EnumHttpStatus } from './config/enums';
+import { EnumHttpStatus, EnumLogLevel } from './config/enums';
 import { notFoundHandler, sendResponse } from './src/http';
 import { PORT } from './config/constants';
+import log from './src/logger';
 
 const healthCheck = (req: IncomingMessage, res: ServerResponse) => {
+  log(EnumLogLevel.INFO, "Health check request");
   sendResponse({
     res,
     status: EnumHttpStatus.OK,

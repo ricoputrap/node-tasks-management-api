@@ -25,3 +25,10 @@ export enum EnumErrorName {
   NOT_FOUND_ERROR = 'NotFoundError',
   TOKEN_EXPIRED_ERROR = 'TokenExpiredError',
 }
+
+export enum EnumLogLevel {
+  DEBUG = 'DEBUG',
+  INFO = 'INFO',
+  WARN = 'WARN',
+  ERROR = 'ERROR',
+}

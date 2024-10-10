@@ -1,4 +1,5 @@
 export const PORT = process.env.PORT || 3000;
+export const LOG_DIR = process.env.LOG_DIR || './logs';
 
 export const CRYPTO_ALGO = process.env.CRYPTO_ALGO || 'aes-256-cbc';
 export const CRYPTO_KEY = process.env.CRYPTO_KEY || '';
