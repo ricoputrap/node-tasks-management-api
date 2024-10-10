@@ -50,42 +50,41 @@ The authentication is utilizing **JWT**, a built-in NodeJS library known as **Cr
 To get started with this project, follow these steps:
 
 1. **Clone the repository**
-  ```bash
-  git clone https://github.com/ricoputrap/node-tasks-management-api
-  cd node-tasks-management-api
-  ```
+    ```bash
+    git clone https://github.com/ricoputrap/node-tasks-management-api
+    cd node-tasks-management-api
+    ```
 
 2. **Install Dependencies**
-  Make sure you have Node.js v22.5.0 or above and npm installed.
-
-  Then run:
-  ```bash
-  npm install
-  ```
+  Make sure you have Node.js v22.5.0 or above and npm installed. Then run:
+    ```bash
+    npm install
+    ```
 
 3. **Set Up Environment Variables**:
   Copy the `.env.example` file and rename it to `.env` and fill in the values for all variables.
 
-  1. How to generate values for `CRYPTO_KEY` and `CRYPTO_IV`
-    1. Write a simple JS script below:
-      ```javascript
-      // generate-crypto-keys.js
-      const crypto = require('crypto');
+     1. **How to generate values for `CRYPTO_KEY` and `CRYPTO_IV`**
+       Write a simple JS script below:
+         ```javascript
+         // generate-crypto-keys.js
+         const crypto = require('crypto');
 
-      const key = crypto.randomBytes(32);
-      const iv = crypto.randomBytes(16);
+         const key = crypto.randomBytes(32);
+         const iv = crypto.randomBytes(16);
 
-      const CRYPTO_KEY = key.toString('hex');
-      const CRYPTO_IV = iv.toString('hex');
+         const CRYPTO_KEY = key.toString('hex');
+         const CRYPTO_IV = iv.toString('hex');
 
-      console.log("CRYPTO_KEY:", CRYPTO_KEY)
-      console.log("CRYPTO_IV:", CRYPTO_IV)
-      ```
-    2. Run the JS script above: `node generate-crypto-keys.js`
-    3. Store the generated value of `CRYPTO_KEY` and `CRYPTO_IV` in your `.env` file.
+         console.log("CRYPTO_KEY:", CRYPTO_KEY)
+         console.log("CRYPTO_IV:", CRYPTO_IV)
+         ```
 
-  2. How to generate values for `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`
-    1. Basically you can put anything inside those two variables.
+          1. Run the JS script above: `node generate-crypto-keys.js`
+          2. Store the generated value of `CRYPTO_KEY` and `CRYPTO_IV` in your `.env` file.
+
+     2. **How to generate values for `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`**
+      Basically you can put anything inside those two variables.
 
 4. **Compile TypeScript**:
    Compile the TypeScript files to JavaScript:
