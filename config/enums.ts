@@ -32,3 +32,8 @@ export enum EnumLogLevel {
   WARN = 'WARN',
   ERROR = 'ERROR',
 }
+
+export enum EnumUserRole {
+  USER = 'user',
+  ADMIN = 'admin'
+}
