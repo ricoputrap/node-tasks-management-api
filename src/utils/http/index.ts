@@ -1,5 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { EnumErrorName, EnumHttpStatus } from '../../../config/enums';
+import { EnumErrorName, EnumHttpStatus, EnumLogLevel } from '../../../config/enums';
+import log from '../logger';
 
 interface Params {
   res: ServerResponse,
@@ -97,6 +98,8 @@ export const errorHandler = (error: any, res: ServerResponse, logPrefix: string)
     default:
       break;
   }
+
+  log(EnumLogLevel.ERROR, `${logPrefix} ${message}`);
 
   sendResponse({
     res,
