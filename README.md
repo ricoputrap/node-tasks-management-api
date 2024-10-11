@@ -16,6 +16,10 @@ The authentication is utilizing **JWT**, a built-in NodeJS library known as **Cr
     - [III. Features](#iii-features)
     - [IV. Technologies](#iv-technologies)
     - [V. Getting Started](#v-getting-started)
+    - [VI. API Endpoints](#vi-api-endpoints)
+      - [A. User Authentication (`/api/auth`)](#a-user-authentication-apiauth)
+      - [B. Task Management (`/api/tasks`)](#b-task-management-apitasks)
+      - [C. User Management (`/api/users`)](#c-user-management-apiusers)
 
 ### III. Features
 
@@ -100,3 +104,30 @@ To get started with this project, follow these steps:
 
 6. **Testing the API**:
    TODO
+
+### VI. API Endpoints
+
+#### A. User Authentication (`/api/auth`)
+Path | Method | Description | Role
+---|---|---|---
+`/api/auth/register` | POST | Create New Account | Public
+`/api/auth/login` | POST | Login | User, Admin
+`/api/auth/logout` | POST | Logout | User, Admin
+`/api/auth/refresh-tokens` | POST | Refresh Token | User, Admin
+
+#### B. Task Management (`/api/tasks`)
+Path | Method | Description | Role
+---|---|---|---
+`/api/tasks` | GET | Get All Tasks | User
+`/api/tasks/:id` | GET | Get Task by ID | User
+`/api/tasks` | POST | Create New Task | User
+`/api/tasks/:id` | PUT | Edit Task | User
+`/api/tasks/:id` | DELETE | Delete Task | User
+
+#### C. User Management (`/api/users`)
+Path | Method | Description | Role
+---|---|---|---
+`/api/users` | GET | Get All Users | Admin
+`/api/users/:id` | GET | Get User by ID | Admin
+`/api/users/:id` | PUT | Edit User | Admin
+`/api/users/:id` | DELETE | Delete User | Admin
