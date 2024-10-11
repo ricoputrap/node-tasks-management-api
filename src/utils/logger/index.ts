@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import { LogFunction } from './index.types';
-import { LOG_DIR } from '../../config/constants';
-import { EnumLogLevel } from '../../config/enums';
+import { LOG_DIR } from '../../../config/constants';
+import { EnumLogLevel } from '../../../config/enums';
 
 /**
  * Ensures the log directory exists, creating it if necessary.

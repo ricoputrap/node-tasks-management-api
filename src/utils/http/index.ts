@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { EnumErrorName, EnumHttpStatus } from '../../config/enums';
+import { EnumErrorName, EnumHttpStatus } from '../../../config/enums';
 
 interface Params {
   res: ServerResponse,

@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import { CRYPTO_ALGO, CRYPTO_IV, CRYPTO_KEY } from '../../config/constants';
+import { CRYPTO_ALGO, CRYPTO_IV, CRYPTO_KEY } from '../../../config/constants';
 
 // createCipheriv & createDecipheriv()
 const algo = CRYPTO_ALGO;

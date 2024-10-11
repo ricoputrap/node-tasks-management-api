@@ -6,7 +6,7 @@ import { blacklistedAccessTokens } from "../stores/tokens";
 import { verifyAccessToken } from "../token";
 import ForbiddenError from "../errors/ForbiddenError";
 import { IPayload, IUserData } from "../token/index.types";
-import { errorHandler } from "../http";
+import { errorHandler } from "../utils/http";
 
 const LOG_PREFIX = "[DECORATORS] authorize";
 
