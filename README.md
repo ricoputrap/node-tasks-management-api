@@ -24,10 +24,10 @@ The authentication is utilizing **JWT**, a built-in NodeJS library known as **Cr
 ### III. Features
 
 - **A. User Authentication**
-  - [ ] Create New Account
-  - [ ] Login
-  - [ ] Logout
-  - [ ] Refresh Token
+  - [x] Create New Account
+  - [x] Login
+  - [x] Logout
+  - [x] Refresh Token
 - **B. Task Management** by **User**
   - [ ] Get All Tasks
   - [ ] Get Task by ID
