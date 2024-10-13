@@ -129,5 +129,5 @@ Path | Method | Description | Role
 ---|---|---|---
 `/api/users` | GET | Get All Users | Admin
 `/api/users/:id` | GET | Get User by ID | Admin
-`/api/users/:id` | PUT | Edit User | Admin
 `/api/users/:id` | DELETE | Delete User | Admin
+`/api/users/:id?archive=1` | DELETE | Archive User | Admin
