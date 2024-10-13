@@ -66,6 +66,22 @@ class AuthController {
       }
     });
   }
+
+  public async logout(req: IncomingMessage, res: ServerResponse) {
+    try {
+      const result = await authService.logout(req, res);
+      sendResponse({
+        res,
+        status: result.status,
+        success: result.success,
+        message: result.message || 'Logout successful'
+      });
+    }
+    catch (error: any) {
+      const logPrefix = `${LOG_PREFIX} logout`;
+      errorHandler(error, res, logPrefix);
+    }
+  }
 }
 
 export default AuthController;
