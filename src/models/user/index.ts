@@ -1,8 +1,33 @@
 import db from "../../../config/database";
 import IUser from "../../entity/user.entity";
-import IUserModel, { INewUser, INewUserData } from "./index.types";
+import IUserModel, { INewUser, INewUserData, ISafeUserData } from "./index.types";
 
 class UserModel implements IUserModel {
+
+  async getAll(): Promise<ISafeUserData[]> {
+    const QUERY = `
+      SELECT id, name, email, role, active
+      FROM USER
+    `;
+
+    const preparedQuery = db.prepare(QUERY);
+    const result = preparedQuery.all() as ISafeUserData[];
+
+    return result;
+  }
+
+  async getUserById(userID: number): Promise<ISafeUserData | undefined> {
+    const QUERY = `
+      SELECT id, name, email, role, active
+      FROM USER
+      WHERE id = ?
+    `;
+
+    const preparedQuery = db.prepare(QUERY);
+    const result = preparedQuery.get(userID) as ISafeUserData;
+
+    return result;
+  }
 
   async getUserByEmail(email: string): Promise<IUser | undefined> {
     const QUERY = `
@@ -46,6 +71,18 @@ class UserModel implements IUserModel {
 
       throw error;
     }
+  }
+
+  async deleteUser(userID: number): Promise<void> {
+    const QUERY = `
+      DELETE FROM USER
+      WHERE id = ?
+    `;
+
+    const preparedQuery = db.prepare(QUERY);
+    preparedQuery.run(userID);
+
+    return;
   }
 }
 
