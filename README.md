@@ -37,7 +37,6 @@ The authentication is utilizing **JWT**, a built-in NodeJS library known as **Cr
 - **C. User Management** by **Admin**
   - [ ] Get All Users
   - [ ] Get User by ID
-  - [ ] Edit User
   - [ ] Delete User
 
 ### IV. Technologies
