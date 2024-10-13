@@ -3,7 +3,7 @@ import { EnumHttpStatus, EnumLogLevel } from './config/enums';
 import { notFoundHandler, sendResponse } from './src/utils/http';
 import { PORT } from './config/constants';
 import log from './src/utils/logger';
-import authRoute from './src/modules/auth/route';
+import authRoute from './src/features/auth/route';
 
 const healthCheck = (req: IncomingMessage, res: ServerResponse) => {
   log(EnumLogLevel.INFO, "Health check request");

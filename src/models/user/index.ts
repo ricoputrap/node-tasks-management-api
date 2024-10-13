@@ -49,4 +49,6 @@ class UserModel implements IUserModel {
   }
 }
 
-export default UserModel;
+const userModel = new UserModel();
+
+export default userModel;

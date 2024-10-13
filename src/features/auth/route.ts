@@ -21,6 +21,7 @@ const authRoute = (req: IncomingMessage, res: ServerResponse) => {
         authController.register(req, res);
         break;
       case EnumPaths.LOGIN:
+        authController.login(req, res);
         break;
       case EnumPaths.REFRESH:
         break;
