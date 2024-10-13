@@ -48,7 +48,35 @@ class TaskController {
     }
   }
 
-  private getById(req: IncomingMessage, res: ServerResponse, taskID: number) {}
+  private async getById(req: IncomingMessage, res: ServerResponse, taskID: number) {
+    try {
+      if (!req.user) {
+        const message = `The user is not allowed to access this resource.`;
+        throw new ForbiddenError(message);
+      }
+
+      const userID = (req.user as IUserData).user_id;
+      const result = await taskService.getById(taskID);
+
+      // check if the task belongs to the user
+      if (result.data?.user_id !== userID) {
+        const message = `The user is not allowed to access this resource.`;
+        throw new ForbiddenError(message);
+      }
+
+      sendResponse({
+        res,
+        status: result.status,
+        success: result.success,
+        message: result.message || 'Task retrieved successfully',
+        data: result.data
+      });
+    }
+    catch (error: any) {
+      const logPrefix = `${LOG_PREFIX} getById`;
+      errorHandler(error, res, logPrefix);
+    }
+  }
 
   @authorize([EnumUserRole.USER])
   public create(req: IncomingMessage, res: ServerResponse) {
