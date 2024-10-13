@@ -27,6 +27,7 @@ const authRoute = (req: IncomingMessage, res: ServerResponse) => {
         authController.logout(req, res);
         break;
       case EnumPaths.REFRESH:
+        authController.refresh(req, res);
         break;
       default:
         notFoundHandler(req, res);

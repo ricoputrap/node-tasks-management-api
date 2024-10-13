@@ -82,6 +82,23 @@ class AuthController {
       errorHandler(error, res, logPrefix);
     }
   }
+
+  public async refresh(req: IncomingMessage, res: ServerResponse) {
+    try {
+      const result = await authService.refresh(req, res);
+      sendResponse({
+        res,
+        status: result.status,
+        success: result.success,
+        message: result.message || 'Refresh successful',
+        data: result.data
+      });
+    }
+    catch (error: any) {
+      const logPrefix = `${LOG_PREFIX} refresh`;
+      errorHandler(error, res, logPrefix);
+    }
+  }
 }
 
 export default AuthController;
