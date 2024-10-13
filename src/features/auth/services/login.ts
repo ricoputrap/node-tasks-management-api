@@ -10,7 +10,7 @@ import userModel from "../../../models/user";
 import NotFoundError from "../../../errors/NotFoundError";
 import UnauthorizedError from "../../../errors/UnauthorizedError";
 
-const LOG_PREFIX = '[AuthService]';
+const LOG_PREFIX = '[AuthService] login';
 
 const login = async (userData: IUserLoginData, res: ServerResponse): Promise<ILoginUserResult> => {
   const result: ILoginUserResult = {
@@ -24,7 +24,7 @@ const login = async (userData: IUserLoginData, res: ServerResponse): Promise<ILo
   // user does not exist
   if (!existingUser) {
     const errorMessage = `User does not exist with email "${userData.email}"`;
-    log(EnumLogLevel.ERROR, `${LOG_PREFIX} login: ${errorMessage}`);
+    log(EnumLogLevel.ERROR, `${LOG_PREFIX}: ${errorMessage}`);
     throw new NotFoundError("User does not exist");
   }
 
@@ -34,7 +34,7 @@ const login = async (userData: IUserLoginData, res: ServerResponse): Promise<ILo
   // compare the password
   if (hashedPassword !== existingUser.password) {
     const errorMessage = `Incorrect password for email "${userData.email}"`;
-    log(EnumLogLevel.ERROR, `${LOG_PREFIX} login: ${errorMessage}`);
+    log(EnumLogLevel.ERROR, `${LOG_PREFIX}: ${errorMessage}`);
     throw new UnauthorizedError("Incorrect password");
   }
 
