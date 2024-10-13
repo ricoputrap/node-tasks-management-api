@@ -95,6 +95,10 @@ export const errorHandler = (error: any, res: ServerResponse, logPrefix: string)
       message = 'Access token expired';
       break;
 
+    case EnumErrorName.CONFLICT_ERROR:
+      status = EnumHttpStatus.CONFLICT;
+      break;
+
     default:
       break;
   }

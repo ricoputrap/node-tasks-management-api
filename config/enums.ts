@@ -24,6 +24,7 @@ export enum EnumErrorName {
   FORBIDDEN_ERROR = 'ForbiddenError',
   NOT_FOUND_ERROR = 'NotFoundError',
   TOKEN_EXPIRED_ERROR = 'TokenExpiredError',
+  CONFLICT_ERROR = 'ConflictError',
 }
 
 export enum EnumLogLevel {
