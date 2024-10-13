@@ -4,6 +4,7 @@ import { notFoundHandler, sendResponse } from './src/utils/http';
 import { PORT } from './config/constants';
 import log from './src/utils/logger';
 import authRoute from './src/features/auth/route';
+import tasksRoute from './src/features/tasks/route';
 
 const healthCheck = (req: IncomingMessage, res: ServerResponse) => {
   log(EnumLogLevel.INFO, "Health check request");
@@ -25,7 +26,8 @@ const server = createServer((req: IncomingMessage, res: ServerResponse) => {
 
   const routes = [
     { url: "/api/health", handler: healthCheck },
-    { url: "/api/auth", handler: authRoute }
+    { url: "/api/auth", handler: authRoute },
+    { url: "/api/tasks", handler: tasksRoute },
   ];
 
   const matchedRoute = routes.find((route) => req.url?.startsWith(route.url));
