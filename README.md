@@ -29,11 +29,11 @@ The authentication is utilizing **JWT**, a built-in NodeJS library known as **Cr
   - [x] Logout
   - [x] Refresh Token
 - **B. Task Management** by **User**
-  - [ ] Get All Tasks
-  - [ ] Get Task by ID
-  - [ ] Create New Task
-  - [ ] Edit Task
-  - [ ] Delete Task
+  - [x] Get All Tasks
+  - [x] Get Task by ID
+  - [x] Create New Task
+  - [x] Edit Task
+  - [x] Delete Task
 - **C. User Management** by **Admin**
   - [ ] Get All Users
   - [ ] Get User by ID
