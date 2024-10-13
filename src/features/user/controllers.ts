@@ -60,11 +60,33 @@ class UserController {
   @authorize([EnumUserRole.ADMIN])
   public async delete(req: IncomingMessage, res: ServerResponse) {
     try {
-      const userID = Number(req.url?.split('/')[3]);
+      const lastPath = req.url?.split('/')[3]
 
+      if (!lastPath) {
+        const message = `The user ID is required.`;
+        throw new BadRequestError(message);
+      }
+
+      const userID = Number(lastPath.split("?")[0]);
       if (!userID) {
         const message = `The user ID is required.`;
         throw new BadRequestError(message);
+      }
+
+      // get query param "archive=1"
+      const url = new URL(req.url!, `http://${req.headers.host}`);
+      const archive: number = Number(url.searchParams.get('archive')) || 0;
+
+      if (archive) {
+        const result = await userService.archiveOne(userID);
+
+        sendResponse({
+          res,
+          status: result.status,
+          success: result.success,
+          message: result.message || 'User archived successfully'
+        });
+        return;
       }
 
       const result = await userService.deleteOne(userID);

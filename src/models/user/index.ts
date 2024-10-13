@@ -84,6 +84,19 @@ class UserModel implements IUserModel {
 
     return;
   }
+
+  async archiveUser(userID: number): Promise<void> {
+    const QUERY = `
+      UPDATE USER
+      SET active = 0
+      WHERE id = ?
+    `;
+
+    const preparedQuery = db.prepare(QUERY);
+    preparedQuery.run(userID);
+
+    return;
+  }
 }
 
 const userModel = new UserModel();

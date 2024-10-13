@@ -10,6 +10,7 @@ interface IUserModel {
   getUserByEmail(email: string): Promise<IUser | undefined>;
   createUser(user: INewUserData): Promise<INewUser>;
   deleteUser(userID: number): Promise<void>;
+  archiveUser(userID: number): Promise<void>;
 }
 
 export default IUserModel;

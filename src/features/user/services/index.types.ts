@@ -9,6 +9,7 @@ interface IUserService {
   getAll(): Promise<IGetAllUsersResult>;
   getById(userID: number): Promise<IGetOneUserResult>;
   deleteOne(userID: number): Promise<IDeleteUserResult>;
+  archiveOne(userID: number): Promise<IDeleteUserResult>;
 }
 
 export default IUserService;
