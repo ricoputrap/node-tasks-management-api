@@ -8,7 +8,7 @@ const LOG_PREFIX = '[TaskService] getAll';
 const getAll = async (userID: number): Promise<IGetAllTasksResult> => {
   const tasks = await taskModel.getAllTasks(userID);
 
-  log(EnumLogLevel.INFO, `${LOG_PREFIX}: Tasks retrieved successfully. Tasks: ${tasks.length}`);
+  log(EnumLogLevel.INFO, `${LOG_PREFIX}: Tasks retrieved successfully. Number of tasks: ${tasks.length}`);
 
   return {
     success: true,
