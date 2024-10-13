@@ -6,24 +6,24 @@ import { blacklistedRefreshTokens } from '../../../stores/tokens';
 import { generateAccessToken, verifyRefreshToken } from '../../../token';
 import { IPayload } from '../../../token/index.types';
 import userModel from '../../../models/user';
+import BadRequestError from '../../../errors/BadRequestError';
+import UnauthorizedError from '../../../errors/UnauthorizedError';
+import NotFoundError from '../../../errors/NotFoundError';
 
 const LOG_PREFIX = "[AuthService] refresh";
 
 const refresh = async (req: IncomingMessage, res: ServerResponse) => {
   try {
     const result: IRefreshTokenResult = {
-      success: false,
-      status: EnumHttpStatus.UNAUTHORIZED
+      success: true,
+      status: EnumHttpStatus.OK
     };
 
     // read the refresh token from cookie httpOnly
     const cookies = req.headers.cookie;
 
     if (!cookies) {
-      result.message = "Refresh token not found";
-
-      log(EnumLogLevel.ERROR, `${LOG_PREFIX}: Authorization cookie is missing`);
-      return result;
+      throw new BadRequestError("Authorization cookie is missing");
     }
 
     const refreshTokenCookie = cookies
@@ -31,10 +31,7 @@ const refresh = async (req: IncomingMessage, res: ServerResponse) => {
       .find((cookie) => cookie.trim().startsWith('refreshToken='));
 
     if (!refreshTokenCookie) {
-      result.message = "Authorization cookie is missing";
-
-      log(EnumLogLevel.ERROR, `${LOG_PREFIX}: Authorization cookie is missing`);
-      return result;
+      throw new BadRequestError("Refresh token is missing");
     }
 
     const refreshToken = refreshTokenCookie
@@ -43,10 +40,7 @@ const refresh = async (req: IncomingMessage, res: ServerResponse) => {
 
     // check if refresh token is blacklisted
     if (blacklistedRefreshTokens[refreshToken]) {
-      result.message = "Refresh token is blacklisted";
-
-      log(EnumLogLevel.ERROR, `${LOG_PREFIX}: Refresh token is blacklisted`);
-      return result;
+      throw new UnauthorizedError("Refresh token has been blacklisted");
     }
 
     // verify the refresh token
@@ -54,10 +48,7 @@ const refresh = async (req: IncomingMessage, res: ServerResponse) => {
 
     // invalid refresh token
     if (!refreshPayload) {
-      result.message = "Invalid refresh token";
-
-      log(EnumLogLevel.ERROR, `${LOG_PREFIX}: Invalid refresh token`);
-      return result;
+      throw new UnauthorizedError("Invalid refresh token");
     }
 
     // get user from db
@@ -65,17 +56,12 @@ const refresh = async (req: IncomingMessage, res: ServerResponse) => {
 
     // user not found
     if (!user) {
-      result.message = "User not found";
-
-      log(EnumLogLevel.ERROR, `${LOG_PREFIX}: User not found`);
-      return result;
+      throw new NotFoundError("User not found");
     }
 
     // generate access
     const accessToken = generateAccessToken(user);
 
-    result.success = true;
-    result.status = EnumHttpStatus.OK;
     result.message = "Access token refreshed successfully";
     result.data = { accessToken }
 
