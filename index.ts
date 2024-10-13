@@ -3,6 +3,7 @@ import { EnumHttpStatus, EnumLogLevel } from './config/enums';
 import { notFoundHandler, sendResponse } from './src/utils/http';
 import { PORT } from './config/constants';
 import log from './src/utils/logger';
+import authRoute from './src/modules/auth/route';
 
 const healthCheck = (req: IncomingMessage, res: ServerResponse) => {
   log(EnumLogLevel.INFO, "Health check request");
@@ -17,8 +18,14 @@ const healthCheck = (req: IncomingMessage, res: ServerResponse) => {
 const server = createServer((req: IncomingMessage, res: ServerResponse) => {
   res.setHeader('Content-Type', 'application/json');
 
+  // log the incoming request
+  const msg = `${req.method} ${req.url}`;
+  console.log(msg);
+  log(EnumLogLevel.INFO, msg);
+
   const routes = [
     { url: "/api/health", handler: healthCheck },
+    { url: "/api/auth", handler: authRoute }
   ];
 
   const matchedRoute = routes.find((route) => req.url?.startsWith(route.url));

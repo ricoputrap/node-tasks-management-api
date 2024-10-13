@@ -99,7 +99,7 @@ export const errorHandler = (error: any, res: ServerResponse, logPrefix: string)
       break;
   }
 
-  log(EnumLogLevel.ERROR, `${logPrefix} ${message}`);
+  log(EnumLogLevel.ERROR, `${logPrefix}: ${message}`);
 
   sendResponse({
     res,
