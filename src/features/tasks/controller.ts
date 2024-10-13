@@ -3,7 +3,7 @@ import { errorHandler, sendResponse } from '../../utils/http';
 import { validateData } from '../../utils/validations';
 import authorize from '../../decorators/authorize';
 import { EnumUserRole } from '../../../config/enums';
-import { IEditTaskSchema, INewTaskData, editTaskSchema, newTaskSchema } from './schemas';
+import { IEditTaskSchema, INewTaskSchema, editTaskSchema, newTaskSchema } from './schemas';
 import taskService from './services';
 import ForbiddenError from '../../errors/ForbiddenError';
 import { IUserData } from '../../token/index.types';
@@ -95,12 +95,12 @@ class TaskController {
           throw new ForbiddenError(message);
         }
 
-        const newTask = validateData<INewTaskData>(res, body, logPrefix, newTaskSchema);
+        const newTask = validateData<INewTaskSchema>(res, body, logPrefix, newTaskSchema);
         if (!newTask) return;
 
-        const result = await taskService.create({
+        const userID: number = (req.user as IUserData).user_id;
+        const result = await taskService.create(userID, {
           name: newTask.name,
-          user_id: (req.user as IUserData).user_id
         });
 
         sendResponse({
