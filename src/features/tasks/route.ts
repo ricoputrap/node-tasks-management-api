@@ -1,26 +1,26 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { EnumHttpMethod } from '../../../config/enums';
 import { notFoundHandler } from '../../utils/http';
-import TasksController from './controller';
+import TaskController from './controller';
 
-const tasksController = new TasksController();
+const taskController = new TaskController();
 
 const tasksRoute = (req: IncomingMessage, res: ServerResponse) => {
   switch (req.method) {
     case EnumHttpMethod.GET:
-      tasksController.get(req, res);
+      taskController.get(req, res);
       break;
 
     case EnumHttpMethod.POST:
-      tasksController.create(req, res);
+      taskController.create(req, res);
       break;
 
     case EnumHttpMethod.PUT:
-      tasksController.update(req, res);
+      taskController.edit(req, res);
       break;
 
     case EnumHttpMethod.DELETE:
-      tasksController.delete(req, res);
+      taskController.delete(req, res);
       break;
 
     default:

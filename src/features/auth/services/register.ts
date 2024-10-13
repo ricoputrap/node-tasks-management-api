@@ -19,7 +19,8 @@ const register = async (userData: IUserRegistrationData): Promise<ICreateUserRes
   const existingUser = await userModel.getUserByEmail(userData.email);
 
   // user already exists
-  if (existingUser) {const errorMessage = "Email already exists";
+  if (existingUser) {
+    const errorMessage = "Email already exists";
     log(EnumLogLevel.ERROR, `${LOG_PREFIX}: ${errorMessage} with email "${userData.email}"`);
     throw new ConflictError(errorMessage);
   }

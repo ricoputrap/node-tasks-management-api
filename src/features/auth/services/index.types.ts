@@ -1,16 +1,8 @@
 import { ServerResponse } from "http";
-import { EnumHttpStatus } from "../../../../config/enums";
 import IUser from "../../../entity/user.entity";
 import { IUserLoginData, IUserRegistrationData } from "../schemas";
 import { IncomingMessage } from "http";
-
-export interface IOperationResult<T> {
-  success: boolean;
-  status: EnumHttpStatus;
-  data?: T;
-  message?: string;
-  errors?: Record<string, string>;
-}
+import { IOperationResult } from "../../types";
 
 export interface ICreateUserResult extends IOperationResult<Omit<IUser, "password" | "active">> { }
 export interface ILoginUserResult extends IOperationResult<{ accessToken: string }> { }
