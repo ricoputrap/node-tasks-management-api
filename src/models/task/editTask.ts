@@ -1,12 +1,11 @@
 import db from "../../../config/database";
 import { EnumLogLevel } from "../../../config/enums";
-import ITask from "../../entity/task.entity";
+import { IEditTaskSchema } from "../../features/tasks/schemas";
 import log from "../../utils/logger";
-import { IEditTaskData } from "./index.types";
 
 const LOG_PREFIX = '[TaskModel] editTask';
 
-export const editTask = async (id: number, task: IEditTaskData): Promise<ITask> => {
+export const editTask = async (id: number, task: IEditTaskSchema): Promise<IEditTaskSchema> => {
   return new Promise((resolve, reject) => {
     try {
       const QUERY = `
@@ -17,14 +16,12 @@ export const editTask = async (id: number, task: IEditTaskData): Promise<ITask> 
 
       const preparedQuery = db.prepare(QUERY);
 
-      const { name, status, user_id } = task;
+      const { name, status } = task;
       preparedQuery.run(name, status, id);
 
       return resolve({
-        id,
         name,
-        status,
-        user_id
+        status
       });
     }
     catch (error: any) {
