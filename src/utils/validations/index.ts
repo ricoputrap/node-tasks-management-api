@@ -2,7 +2,7 @@ import { ServerResponse } from 'http';
 import { sendResponse } from '../http';
 import { EnumHttpStatus, EnumLogLevel } from '../../../config/enums';
 import log from '../logger';
-import { ZodIssue } from 'zod';
+import { ZodIssue, ZodSchema } from 'zod';
 
 /**
  * Parse the incoming JSON body, and return the parsed data if successful.
@@ -74,4 +74,23 @@ export const handleSchemaValidationError = (
 
   // log the error
   log(EnumLogLevel.ERROR, `${logPrefix}: Validation failed ${JSON.stringify(errors)}`);
+}
+
+export const validateData = <T>(
+  res: ServerResponse,
+  body: string,
+  logPrefix: string,
+  schema: ZodSchema
+): T | undefined => {
+  // parse the incoming JSON body
+  const data = parseData(res, body, logPrefix);
+  if (!data) return;
+
+  // validate the data using Zod
+  const result = schema.safeParse(data);
+  if (!result.success) {
+    handleSchemaValidationError(res, result.error.issues, logPrefix);
+    return;
+  }
+  return result.data;
 }
