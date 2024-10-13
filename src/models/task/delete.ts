@@ -4,7 +4,7 @@ import log from "../../utils/logger";
 
 const LOG_PREFIX = '[TaskModel] deleteTask';
 
-const deleteTask = async (taskID: number): Promise<number> => {
+const deleteTask = async (taskID: number): Promise<void> => {
   return new Promise((resolve, reject) => {
     try {
       const QUERY = `
@@ -15,7 +15,7 @@ const deleteTask = async (taskID: number): Promise<number> => {
       const preparedQuery = db.prepare(QUERY);
       preparedQuery.run(taskID);
 
-      return resolve(taskID);
+      return resolve();
     }
     catch (error: any) {
       log(EnumLogLevel.ERROR, `${LOG_PREFIX}: ${error.message}`);

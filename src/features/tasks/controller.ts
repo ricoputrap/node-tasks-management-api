@@ -163,7 +163,35 @@ class TaskController {
   }
 
   @authorize([EnumUserRole.USER])
-  public delete(req: IncomingMessage, res: ServerResponse) {}
+  public async delete(req: IncomingMessage, res: ServerResponse) {
+    const taskID: number = Number(req.url?.split('/')[3]);
+
+    if (!taskID) {
+      const message = `The task ID is required.`;
+      throw new BadRequestError(message);
+    }
+
+    if (!req.user) {
+      const message = `The user is not allowed to access this task.`;
+      throw new ForbiddenError(message);
+    }
+
+    try {
+      const userID = (req.user as IUserData).user_id;
+      const result = await taskService.deleteOne(taskID, userID);
+
+      sendResponse({
+        res,
+        status: result.status,
+        success: result.success,
+        message: result.message || 'Task deleted successfully'
+      });
+    }
+    catch (error) {
+      const logPrefix = `${LOG_PREFIX} delete`;
+      errorHandler(error, res, logPrefix);
+    }
+  }
 }
 
 export default TaskController;

@@ -8,7 +8,7 @@ interface ITaskModel {
   getTaskByID(taskID: number): Promise<ITask | undefined>;
   createTask(task: INewTaskData): Promise<ITask>;
   editTask(id: number, task: IEditTaskSchema): Promise<IEditTaskSchema>;
-  deleteTask(taskID: number): Promise<number>;
+  deleteTask(taskID: number): Promise<void>;
 }
 
 export default ITaskModel;

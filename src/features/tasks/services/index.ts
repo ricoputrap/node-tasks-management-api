@@ -1,4 +1,5 @@
 import create from "./create";
+import deleteOne from "./deleteOne";
 import edit from "./edit";
 import getAll from "./getAll";
 import getById from "./getById";
@@ -8,7 +9,8 @@ const taskService: ITaskService = {
   getAll,
   getById,
   create,
-  edit
+  edit,
+  deleteOne
 }
 
 export default taskService;

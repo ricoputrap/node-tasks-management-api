@@ -6,13 +6,14 @@ export interface IGetAllTasksResult extends IOperationResult<ITask[]> {};
 export interface IGetOneTaskResult extends IOperationResult<ITask> {};
 export interface ICreateTaskResult extends IOperationResult<ITask> {};
 export interface IEditTaskResult extends IOperationResult<ITask> {};
+export interface IDeleteTaskResult extends IOperationResult<number> {};
 
 interface ITaskService {
   getAll(userID: number): Promise<IGetAllTasksResult>;
   getById(taskID: number): Promise<IGetOneTaskResult>;
   create(userID: number, taskData: INewTaskSchema): Promise<ICreateTaskResult>;
   edit(id: number, userID: number, task: IEditTaskSchema): Promise<IEditTaskResult>;
-  // deleteOne(taskID: number): Promise<number>;
+  deleteOne(taskID: number, userID: number): Promise<IDeleteTaskResult>;
 }
 
 export default ITaskService;
